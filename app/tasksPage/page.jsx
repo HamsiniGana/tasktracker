@@ -20,10 +20,12 @@ export default function tasksPage() {
     const [inProgressTasks, setInProgressTasks] = useState([]);
     const [doneTasks, setDoneTasks] = useState([]);
     const [activeCard, setActiveCard] = useState(null);
+    const [activeText, setActiveText] = useState('');
     const [hydrated, setHydrated] = useState(false);
     const [category, setCategory] = useState("todo");
     const [pendingTaskUpdate, setPendingTaskUpdate] = useState(null)
     const [pendingTaskText, setPendingTaskText] = useState('')
+    const [pendingActiveText, setPendingActiveText] = useState(null)
 
     const addTask = (textPassed) => {
             if (category === "todo") {
@@ -42,6 +44,12 @@ export default function tasksPage() {
             setPendingTaskUpdate(null)
         }
     }, [pendingTaskUpdate])
+
+    useEffect(() => {
+        if (pendingActiveText !== null) {
+            setPendingActiveText(null)
+        }
+    }, [pendingActiveText])
 
     useEffect(() => {
         if (typeof window !== "undefined") {
@@ -106,9 +114,35 @@ export default function tasksPage() {
                 </Modal>
             </div>
             <div className="flex flex-row justify-between mt-5 pt-5">
-                <TaskColumn tasks={toDoTasks} heading="TODO" setActiveCard={setActiveCard} addTask={addTask} setCategory={setCategory} setPendingTaskUpdate={setPendingTaskUpdate} setPendingTaskText={setPendingTaskText}/>
-                <TaskColumn tasks={inProgressTasks} heading="IN PROGRESS" setActiveCard={setActiveCard} addTask={addTask} setCategory={setCategory} setPendingTaskUpdate={setPendingTaskUpdate} setPendingTaskText={setPendingTaskText}/>
-                <TaskColumn tasks={doneTasks} heading="DONE" setActiveCard={setActiveCard} addTask={addTask} setCategory={setCategory} setPendingTaskUpdate={setPendingTaskUpdate} setPendingTaskText={setPendingTaskText}/>
+                <TaskColumn tasks={toDoTasks} 
+                heading="TODO" setActiveCard={setActiveCard} 
+                addTask={addTask} setCategory={setCategory} 
+                setPendingTaskUpdate={setPendingTaskUpdate} 
+                setPendingTaskText={setPendingTaskText} 
+                setActiveText={setActiveText}
+                activeText={activeText}
+                setPendingActiveText={setPendingActiveText}/>
+                <TaskColumn tasks={inProgressTasks} 
+                heading="IN PROGRESS" 
+                setActiveCard={setActiveCard} 
+                addTask={addTask} 
+                setCategory={setCategory} 
+                setPendingTaskUpdate={setPendingTaskUpdate} 
+                setPendingTaskText={setPendingTaskText} 
+                setActiveText={setActiveText}
+                activeText={activeText}
+                setPendingActiveText={setPendingActiveText}/>
+                <TaskColumn 
+                tasks={doneTasks} 
+                heading="DONE" 
+                setActiveCard={setActiveCard} 
+                addTask={addTask} 
+                setCategory={setCategory} 
+                setPendingTaskUpdate={setPendingTaskUpdate} 
+                setPendingTaskText={setPendingTaskText} 
+                setActiveText={setActiveText}
+                activeText={activeText}
+                setPendingActiveText={setPendingActiveText}/>
             </div>
             {/* <h1 className="text-white">Active card: {activeCard}</h1> */}
         </div>

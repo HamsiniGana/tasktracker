@@ -14,7 +14,7 @@ export default function DropArea(props) {
             } else if (props.column === "DONE") {
               props.setCategory("done")
             }
-            props.setPendingTaskText(props.text)
+            props.setPendingTaskText(props.activeText)
             props.setPendingTaskUpdate("pending")
             setShowDropAreas(false)
            }}
