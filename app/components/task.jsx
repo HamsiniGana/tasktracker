@@ -4,7 +4,7 @@ import {Card, CardHeader, CardBody, CardFooter, Divider} from "@heroui/react";
 import DropArea from "./dropArea";
 import Image from 'next/image'
 import bin from '../assets/delete.svg'
-import DeleteTaskModal from "./deleteTaskModal";
+import DeleteModal from "./deleteModal";
 import {
   useDisclosure,
 } from "@heroui/react";
@@ -32,7 +32,7 @@ export default function Task(props) {
             onClick={onOpen}
           />
         </CardFooter>
-        <DeleteTaskModal
+        <DeleteModal
         onClick={()=> {
               props.setActiveText(props.text);
               props.setPendingActiveText("pending")
@@ -42,7 +42,8 @@ export default function Task(props) {
         onOpenChange={onOpenChange}
         removeTask={props.removeTask}
         column={props.column}
-        text={props.text} />
+        text={props.text} 
+        purpose="deleteTask"/>
         <Divider />
       </Card>
       <DropArea addTask={props.addTask}

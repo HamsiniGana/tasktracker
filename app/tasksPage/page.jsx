@@ -1,22 +1,23 @@
+// TODO:
+// add task err check
+// Edit tasks
+// Add calender
+// Design landing page
+// update navbar
 "use client";
 import {
-  Modal,
-  ModalContent,
-  ModalHeader,
-  ModalBody,
-  ModalFooter,
   Button,
   useDisclosure,
 } from "@heroui/react";
+
 import { useState } from "react";
 import { useEffect } from "react";
 import TaskColumn from '../components/taskColumn'
 import AddTaskModal from "../components/addTaskModal";
-
-
-
+import DeleteModal from "../components/deleteModal";
 export default function tasksPage() {
     const {isOpen, onOpen, onOpenChange} = useDisclosure();
+
     const [textEntered, setTextEntered] = useState('');
     const [toDoTasks, setToDoTasks] = useState([]);
     const [inProgressTasks, setInProgressTasks] = useState([]);
@@ -31,11 +32,21 @@ export default function tasksPage() {
 
     const addTask = (textPassed) => {
             if (category === "todo") {
-                setToDoTasks(prevArr => [...prevArr, textPassed])
+                const exists = toDoTasks.find(txt => txt === textPassed)
+                if (!exists) {
+                    setToDoTasks(prevArr => [...prevArr, textPassed])
+                } 
+
             } else if (category === "in progress") {
-                setInProgressTasks(prevArr => [...prevArr, textPassed])
+                const exists = inProgressTasks.find(txt => txt ===textPassed)
+                if (!exists) {
+                    setInProgressTasks(prevArr => [...prevArr, textPassed])
+                }
             } else if (category === "done"){
-                setDoneTasks(prevArr => [...prevArr, textPassed])
+                   const exists = doneTasks.find(txt => txt ===textPassed)
+                if (!exists) {
+                    setDoneTasks(prevArr => [...prevArr, textPassed])
+                }
             }
             // setPendingTaskUpdate(null)
     }
@@ -99,85 +110,63 @@ export default function tasksPage() {
     if (!hydrated) return null; // Don’t render yet
     return (
         <div className="flex flex-col">
+
             <div className="text-6xl flex flex-row items-center justify-center pb-5">
                 <h1 className="flex-1">My tasks</h1>
                 <Button onPress={onOpen} className="ms-5 flex-2 bg-gradient-to-r from-blue-500 to-green-600">+ Add task</Button>
-                <AddTaskModal 
-                isOpen={isOpen} 
-                onOpenChange={onOpenChange} 
+                <AddTaskModal
+                isOpen={isOpen}
+                onOpenChange={onOpenChange}
                 onOpen={onOpen}
                 addTask={addTask}
                 setTextEntered={setTextEntered}
                 setCategory={setCategory}
-                textEntered={textEntered}/>
-                {/* <Modal isOpen={isOpen} o nOpenChange={onOpenChange}>
-                    <ModalContent>
-                    {(onClose) => (
-                        <>
-                        <ModalHeader className="flex flex-col gap-1">Add task</ModalHeader>
-                        <ModalBody>
-                            <h3 className="text-gray-400">Task description:</h3>
-                            <Input placeholder="Enter task description"
-                                type="text"
-                                onChange={(e)=>setTextEntered(e.target.value)} />
+                textEntered={textEntered}
+                />
 
-                            <RadioGroup label="Add to:">
-                                <Radio value="todo" onChange={()=> setCategory("todo")}>Todo</Radio>
-                                <Radio value="in progress" onChange={()=> setCategory("in progress")}>In progress</Radio>
-                                <Radio value="done" onChange={()=> setCategory("done")}>Done</Radio>
-                            </RadioGroup>
-                        </ModalBody>
-                        <ModalFooter>
-                            <Button color="danger" variant="light" onPress={onClose}>
-                            Close
-                            </Button>
-                            <Button className="bg-gradient-to-r from-blue-500 to-green-600"
-                                    onPress={() => {
-                                        onClose();
-                                        addTask(textEntered);
-                                        }}>
-                                Confirm
-                            </Button>
-                        </ModalFooter>
-                        </>
-                    )}
-                    </ModalContent>
-                </Modal> */}
             </div>
             <div className="flex flex-row justify-between mt-5 pt-5">
-                <TaskColumn tasks={toDoTasks}
-                heading="TODO"
-                setActiveCard={setActiveCard}
-                setCategory={setCategory}
-                setActiveText={setActiveText}
-                activeText={activeText}
-                setPendingActiveText={setPendingActiveText}
-                setUpdate={setUpdate}
-                category={category}
-                removeTask={removeTask}/>
-
-                <TaskColumn tasks={inProgressTasks}
-                heading="IN PROGRESS"
-                setActiveCard={setActiveCard}
-                setCategory={setCategory}
-                setActiveText={setActiveText}
-                activeText={activeText}
-                setPendingActiveText={setPendingActiveText}
-                setUpdate={setUpdate}
-                category={category}
-                removeTask={removeTask}/>
+                <TaskColumn
+                    tasks={toDoTasks}
+                    setTasks={setToDoTasks}
+                    heading="TODO"
+                    setActiveCard={setActiveCard}
+                    setCategory={setCategory}
+                    category={category}
+                    setActiveText={setActiveText}
+                    activeText={activeText}
+                    setPendingActiveText={setPendingActiveText}
+                    setUpdate={setUpdate}
+                    removeTask={removeTask}
+                />
 
                 <TaskColumn
-                tasks={doneTasks}
-                heading="DONE"
-                setActiveCard={setActiveCard}
-                setCategory={setCategory}
-                setActiveText={setActiveText}
-                activeText={activeText}
-                setPendingActiveText={setPendingActiveText}
-                setUpdate={setUpdate}
-                category={category}
-                removeTask={removeTask}/>
+                    tasks={inProgressTasks}
+                    setTasks={setInProgressTasks}
+                    heading="IN PROGRESS"
+                    setActiveCard={setActiveCard}
+                    setCategory={setCategory}
+                    category={category}
+                    setActiveText={setActiveText}
+                    activeText={activeText}
+                    setPendingActiveText={setPendingActiveText}
+                    setUpdate={setUpdate}
+                    removeTask={removeTask}
+                />
+
+                <TaskColumn
+                    tasks={doneTasks}
+                    setTasks={setDoneTasks}
+                    heading="DONE"
+                    setActiveCard={setActiveCard}
+                    setCategory={setCategory}
+                    category={category}
+                    setActiveText={setActiveText}
+                    activeText={activeText}
+                    setPendingActiveText={setPendingActiveText}
+                    setUpdate={setUpdate}
+                    removeTask={removeTask}
+                />
             </div>
             {/* <h1 className="text-white">Active card: {activeCard}</h1> */}
         </div>

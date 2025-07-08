@@ -10,11 +10,9 @@ import {
 import {Input} from "@heroui/react";
 import {RadioGroup, Radio} from "@heroui/radio";
 
-
 export default function AddTaskModal (props) {
-   
+
     return (
-        
          <Modal isOpen={props.isOpen} onOpenChange={props.onOpenChange}>
                     <ModalContent>
                     {(onClose) => (
