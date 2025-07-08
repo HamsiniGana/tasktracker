@@ -39,6 +39,9 @@ export default function tasksPage() {
     }
 
     const removeTask = (textPassed, categoryPassed) => {
+        // console.log('hiiiiiiii')
+        // console.log('textPassed:', textPassed)
+        // console.log('categoryPassed:', categoryPassed)
         if (categoryPassed === "todo") {
             const foundTask = toDoTasks.find(txt => txt === textPassed)
             if (foundTask) {
@@ -143,7 +146,8 @@ export default function tasksPage() {
                 activeText={activeText}
                 setPendingActiveText={setPendingActiveText}
                 setUpdate={setUpdate}
-                category={category}/>
+                category={category}
+                removeTask={removeTask}/>
 
                 <TaskColumn tasks={inProgressTasks} 
                 heading="IN PROGRESS" 
@@ -153,7 +157,8 @@ export default function tasksPage() {
                 activeText={activeText}
                 setPendingActiveText={setPendingActiveText}
                 setUpdate={setUpdate}
-                category={category}/>
+                category={category}
+                removeTask={removeTask}/>
 
                 <TaskColumn
                 tasks={doneTasks} 
@@ -164,7 +169,8 @@ export default function tasksPage() {
                 activeText={activeText}
                 setPendingActiveText={setPendingActiveText}
                 setUpdate={setUpdate}
-                category={category}/>
+                category={category}
+                removeTask={removeTask}/>
             </div>
             {/* <h1 className="text-white">Active card: {activeCard}</h1> */}
         </div>

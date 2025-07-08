@@ -16,17 +16,18 @@ export default function TaskColumn(props) {
                 />
             {props.tasks.map((item, index) => (
              <Task key={index}
-                   index={index}
-                   text={item}
-                   setActiveCard={props.setActiveCard}
-                   addTask={props.addTask}
-                   column={props.heading}
-                   setCategory={props.setCategory}
-                   setActiveText={props.setActiveText}
-                   activeText={props.activeText}
-                   setPendingActiveText={props.setPendingActiveText}
+                  index={index}
+                  text={item}
+                  setActiveCard={props.setActiveCard}
+                  addTask={props.addTask}
+                  column={props.heading}
+                  setCategory={props.setCategory}
+                  setActiveText={props.setActiveText}
+                  activeText={props.activeText}
+                  setPendingActiveText={props.setPendingActiveText}
                   setUpdate={props.setUpdate}
                   category={props.category}
+                  removeTask={props.removeTask}
               />
             ))}
         </div>
