@@ -8,11 +8,13 @@ import {
   Button,
   useDisclosure,
 } from "@heroui/react";
-import {RadioGroup, Radio} from "@heroui/radio";
 import { useState } from "react";
 import { useEffect } from "react";
-import {Input} from "@heroui/react";
 import TaskColumn from '../components/taskColumn'
+import AddTaskModal from "../components/addTaskModal";
+
+
+
 export default function tasksPage() {
     const {isOpen, onOpen, onOpenChange} = useDisclosure();
     const [textEntered, setTextEntered] = useState('');
@@ -39,9 +41,7 @@ export default function tasksPage() {
     }
 
     const removeTask = (textPassed, categoryPassed) => {
-        // console.log('hiiiiiiii')
-        // console.log('textPassed:', textPassed)
-        // console.log('categoryPassed:', categoryPassed)
+
         if (categoryPassed === "todo") {
             const foundTask = toDoTasks.find(txt => txt === textPassed)
             if (foundTask) {
@@ -102,8 +102,15 @@ export default function tasksPage() {
             <div className="text-6xl flex flex-row items-center justify-center pb-5">
                 <h1 className="flex-1">My tasks</h1>
                 <Button onPress={onOpen} className="ms-5 flex-2 bg-gradient-to-r from-blue-500 to-green-600">+ Add task</Button>
-
-                <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
+                <AddTaskModal 
+                isOpen={isOpen} 
+                onOpenChange={onOpenChange} 
+                onOpen={onOpen}
+                addTask={addTask}
+                setTextEntered={setTextEntered}
+                setCategory={setCategory}
+                textEntered={textEntered}/>
+                {/* <Modal isOpen={isOpen} o nOpenChange={onOpenChange}>
                     <ModalContent>
                     {(onClose) => (
                         <>
@@ -135,7 +142,7 @@ export default function tasksPage() {
                         </>
                     )}
                     </ModalContent>
-                </Modal>
+                </Modal> */}
             </div>
             <div className="flex flex-row justify-between mt-5 pt-5">
                 <TaskColumn tasks={toDoTasks}
@@ -149,10 +156,10 @@ export default function tasksPage() {
                 category={category}
                 removeTask={removeTask}/>
 
-                <TaskColumn tasks={inProgressTasks} 
-                heading="IN PROGRESS" 
-                setActiveCard={setActiveCard} 
-                setCategory={setCategory} 
+                <TaskColumn tasks={inProgressTasks}
+                heading="IN PROGRESS"
+                setActiveCard={setActiveCard}
+                setCategory={setCategory}
                 setActiveText={setActiveText}
                 activeText={activeText}
                 setPendingActiveText={setPendingActiveText}
@@ -161,10 +168,10 @@ export default function tasksPage() {
                 removeTask={removeTask}/>
 
                 <TaskColumn
-                tasks={doneTasks} 
-                heading="DONE" 
-                setActiveCard={setActiveCard} 
-                setCategory={setCategory} 
+                tasks={doneTasks}
+                heading="DONE"
+                setActiveCard={setActiveCard}
+                setCategory={setCategory}
                 setActiveText={setActiveText}
                 activeText={activeText}
                 setPendingActiveText={setPendingActiveText}
