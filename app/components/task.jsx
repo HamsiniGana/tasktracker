@@ -11,7 +11,6 @@ export default function Task(props) {
               props.setActiveCard(props.index)
               props.setActiveText(props.text)
               props.setPendingActiveText("pending")
-              // console.log(props.activeText)
             }}
             onDragEnd={() => props.setActiveCard(null)}>
         <CardBody >
@@ -19,13 +18,15 @@ export default function Task(props) {
         </CardBody>
         <Divider />
       </Card>
-      <DropArea  addTask={props.addTask}
-                 column={props.column}
-                 setCategory={props.setCategory}
-                 text={props.text}
-                 setPendingTaskUpdate={props.setPendingTaskUpdate}
-                 setPendingTaskText={props.setPendingTaskText}
-                 activeText={props.activeText}/>
+      <DropArea addTask={props.addTask}
+                column={props.column}
+                text={props.text}
+                setPendingTaskUpdate={props.setPendingTaskUpdate}
+                activeText={props.activeText}
+                setUpdate={props.setUpdate}
+                category={props.category}
+                setCategory={props.setCategory}
+      />
     </>
   );
 }

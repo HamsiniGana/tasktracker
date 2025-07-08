@@ -7,15 +7,8 @@ export default function DropArea(props) {
       <div onDragEnter={() => setShowDropAreas(true)}
            onDragLeave={() => setShowDropAreas(false)}
            onDrop={() => {
-            if (props.column === "TODO") {
-              props.setCategory("todo")
-            } else if (props.column === "IN PROGRESS") {
-              props.setCategory("inprogress")
-            } else if (props.column === "DONE") {
-              props.setCategory("done")
-            }
-            props.setPendingTaskText(props.activeText)
-            props.setPendingTaskUpdate("pending")
+            props.setUpdate({text: props.activeText, from: props.category, to: props.column.toLowerCase(), status:'pending'})
+            props.setCategory(props.column.toLowerCase())
             setShowDropAreas(false)
            }}
            onDragOver={e => e.preventDefault()}

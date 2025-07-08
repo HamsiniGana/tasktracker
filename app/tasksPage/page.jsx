@@ -23,27 +23,48 @@ export default function tasksPage() {
     const [activeText, setActiveText] = useState('');
     const [hydrated, setHydrated] = useState(false);
     const [category, setCategory] = useState("todo");
-    const [pendingTaskUpdate, setPendingTaskUpdate] = useState(null)
-    const [pendingTaskText, setPendingTaskText] = useState('')
+    // const [pendingTaskUpdate, setPendingTaskUpdate] = useState(null)
     const [pendingActiveText, setPendingActiveText] = useState(null)
+    const [update, setUpdate] = useState({text: '', from: '', to: '', status: null})
 
     const addTask = (textPassed) => {
             if (category === "todo") {
                 setToDoTasks(prevArr => [...prevArr, textPassed])
-            } else if (category === "inprogress") {
+            } else if (category === "in progress") {
                 setInProgressTasks(prevArr => [...prevArr, textPassed])
             } else if (category === "done"){
                 setDoneTasks(prevArr => [...prevArr, textPassed])
             }
-            setPendingTaskUpdate(null)
+            // setPendingTaskUpdate(null)
+    }
+
+    const removeTask = (textPassed, categoryPassed) => {
+        if (categoryPassed === "todo") {
+            const foundTask = toDoTasks.find(txt => txt === textPassed)
+            if (foundTask) {
+                 setToDoTasks(prevArr => prevArr.filter(txt => txt !== textPassed))
+            }
+        } else if (categoryPassed === "in progress") {
+            const foundTask = inProgressTasks.find(txt => txt === textPassed)
+            if (foundTask) {
+                setInProgressTasks(prevArr => prevArr.filter(txt => txt !== textPassed))
+            }
+        } else if (categoryPassed === "done"){
+            const foundTask = doneTasks.find(txt => txt === textPassed)
+            if (foundTask) {
+                setDoneTasks(prevArr => prevArr.filter(txt => txt !== textPassed))
+            }
+        }
     }
 
     useEffect(() => {
-        if (pendingTaskUpdate !== null) {
-            addTask(pendingTaskText)
-            setPendingTaskUpdate(null)
+        if (update.status !== null) {
+            console.log(update, category)
+            removeTask(update.text, update.from)
+            addTask(update.text)
+            setUpdate({text: '', from: '', to: '', status: null})
         }
-    }, [pendingTaskUpdate])
+    }, [update])
 
     useEffect(() => {
         if (pendingActiveText !== null) {
@@ -92,7 +113,7 @@ export default function tasksPage() {
 
                             <RadioGroup label="Add to:">
                                 <Radio value="todo" onChange={()=> setCategory("todo")}>Todo</Radio>
-                                <Radio value="inprogress" onChange={()=> setCategory("inprogress")}>In progress</Radio>
+                                <Radio value="in progress" onChange={()=> setCategory("in progress")}>In progress</Radio>
                                 <Radio value="done" onChange={()=> setCategory("done")}>Done</Radio>
                             </RadioGroup>
                         </ModalBody>
@@ -114,37 +135,36 @@ export default function tasksPage() {
                 </Modal>
             </div>
             <div className="flex flex-row justify-between mt-5 pt-5">
-                <TaskColumn tasks={toDoTasks} 
-                heading="TODO" setActiveCard={setActiveCard} 
-                addTask={addTask} setCategory={setCategory} 
-                setPendingTaskUpdate={setPendingTaskUpdate} 
-                setPendingTaskText={setPendingTaskText} 
+                <TaskColumn tasks={toDoTasks}
+                heading="TODO"
+                setActiveCard={setActiveCard}
+                setCategory={setCategory}
                 setActiveText={setActiveText}
                 activeText={activeText}
-                setPendingActiveText={setPendingActiveText}/>
-                
+                setPendingActiveText={setPendingActiveText}
+                setUpdate={setUpdate}
+                category={category}/>
+
                 <TaskColumn tasks={inProgressTasks} 
                 heading="IN PROGRESS" 
                 setActiveCard={setActiveCard} 
-                addTask={addTask} 
                 setCategory={setCategory} 
-                setPendingTaskUpdate={setPendingTaskUpdate} 
-                setPendingTaskText={setPendingTaskText} 
                 setActiveText={setActiveText}
                 activeText={activeText}
-                setPendingActiveText={setPendingActiveText}/>
+                setPendingActiveText={setPendingActiveText}
+                setUpdate={setUpdate}
+                category={category}/>
 
                 <TaskColumn
                 tasks={doneTasks} 
                 heading="DONE" 
                 setActiveCard={setActiveCard} 
-                addTask={addTask} 
                 setCategory={setCategory} 
-                setPendingTaskUpdate={setPendingTaskUpdate} 
-                setPendingTaskText={setPendingTaskText} 
                 setActiveText={setActiveText}
                 activeText={activeText}
-                setPendingActiveText={setPendingActiveText}/>
+                setPendingActiveText={setPendingActiveText}
+                setUpdate={setUpdate}
+                category={category}/>
             </div>
             {/* <h1 className="text-white">Active card: {activeCard}</h1> */}
         </div>
