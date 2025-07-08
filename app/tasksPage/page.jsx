@@ -122,6 +122,7 @@ export default function tasksPage() {
                 setActiveText={setActiveText}
                 activeText={activeText}
                 setPendingActiveText={setPendingActiveText}/>
+                
                 <TaskColumn tasks={inProgressTasks} 
                 heading="IN PROGRESS" 
                 setActiveCard={setActiveCard} 
@@ -132,7 +133,8 @@ export default function tasksPage() {
                 setActiveText={setActiveText}
                 activeText={activeText}
                 setPendingActiveText={setPendingActiveText}/>
-                <TaskColumn 
+
+                <TaskColumn
                 tasks={doneTasks} 
                 heading="DONE" 
                 setActiveCard={setActiveCard} 

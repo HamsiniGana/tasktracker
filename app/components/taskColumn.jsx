@@ -7,7 +7,7 @@ export default function TaskColumn(props) {
         <h3 className="text-2xl mb-5">{props.heading}</h3>
         <div className="bg-gray-900 w-60 min-h-80 rounded-lg">
             <DropArea
-                  addTask={props.addTask}
+                 addTask={props.addTask}
                  column={props.heading}
                  setCategory={props.setCategory}
                  setPendingTaskUpdate={props.setPendingTaskUpdate}
