@@ -1,5 +1,4 @@
 import {CircularProgress} from "@heroui/react";
-import { px } from "framer-motion";
 
 export default function Progress(props) {
   return (
