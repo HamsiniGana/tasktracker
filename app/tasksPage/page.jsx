@@ -4,6 +4,8 @@
 // Add calender
 // Design landing page
 // update navbar
+// add progrss bar
+// after removing task or clearing all , remove from taskInfo as well
 "use client";
 import {
   Button,
@@ -14,10 +16,11 @@ import { useState } from "react";
 import { useEffect } from "react";
 import TaskColumn from '../components/taskColumn'
 import AddTaskModal from "../components/addTaskModal";
-import DeleteModal from "../components/deleteModal";
+import Progress from "../components/progress";
+
+
 export default function tasksPage() {
     const {isOpen, onOpen, onOpenChange} = useDisclosure();
-
     const [textEntered, setTextEntered] = useState('');
     const [toDoTasks, setToDoTasks] = useState([]);
     const [inProgressTasks, setInProgressTasks] = useState([]);
@@ -25,27 +28,33 @@ export default function tasksPage() {
     const [activeCard, setActiveCard] = useState(null);
     const [activeText, setActiveText] = useState('');
     const [hydrated, setHydrated] = useState(false);
-    const [category, setCategory] = useState("todo");
-    // const [pendingTaskUpdate, setPendingTaskUpdate] = useState(null)
+    const [taskInfo, setTaskInfo] = useState([]); // structure of state variable: [{taskText: '', taskParent: ''}]
+
     const [pendingActiveText, setPendingActiveText] = useState(null)
     const [update, setUpdate] = useState({text: '', from: '', to: '', status: null})
+    const [progressValue, setProgressValue] = useState(0);
 
-    const addTask = (textPassed) => {
-            if (category === "todo") {
+    const addTask = (textPassed, categoryPassed) => {
+            if (categoryPassed === "todo") {
                 const exists = toDoTasks.find(txt => txt === textPassed)
                 if (!exists) {
                     setToDoTasks(prevArr => [...prevArr, textPassed])
-                } 
+                    setTaskInfo(prevArr => [...prevArr, {taskText: textPassed, taskParent: categoryPassed}])
+                }
 
-            } else if (category === "in progress") {
+            } else if (categoryPassed === "in progress") {
                 const exists = inProgressTasks.find(txt => txt ===textPassed)
                 if (!exists) {
                     setInProgressTasks(prevArr => [...prevArr, textPassed])
+                    setTaskInfo(prevArr => [...prevArr, {taskText: textPassed, taskParent: categoryPassed}])
+
                 }
-            } else if (category === "done"){
+            } else if (categoryPassed === "done"){
                    const exists = doneTasks.find(txt => txt ===textPassed)
                 if (!exists) {
                     setDoneTasks(prevArr => [...prevArr, textPassed])
+                    setTaskInfo(prevArr => [...prevArr, {taskText: textPassed, taskParent: categoryPassed}])
+
                 }
             }
             // setPendingTaskUpdate(null)
@@ -56,26 +65,32 @@ export default function tasksPage() {
         if (categoryPassed === "todo") {
             const foundTask = toDoTasks.find(txt => txt === textPassed)
             if (foundTask) {
-                 setToDoTasks(prevArr => prevArr.filter(txt => txt !== textPassed))
+                setToDoTasks(prevArr => prevArr.filter(txt => txt !== textPassed))
+                setTaskInfo(prev => prev.filter(t => t.taskText !== textPassed))
             }
         } else if (categoryPassed === "in progress") {
             const foundTask = inProgressTasks.find(txt => txt === textPassed)
             if (foundTask) {
                 setInProgressTasks(prevArr => prevArr.filter(txt => txt !== textPassed))
+                setTaskInfo(prev => prev.filter(t => t.taskText !== textPassed))
+
             }
         } else if (categoryPassed === "done"){
             const foundTask = doneTasks.find(txt => txt === textPassed)
             if (foundTask) {
                 setDoneTasks(prevArr => prevArr.filter(txt => txt !== textPassed))
+                setTaskInfo(prev => prev.filter(t => t.taskText !== textPassed))
+
             }
         }
     }
 
     useEffect(() => {
         if (update.status !== null) {
-            console.log(update, category)
             removeTask(update.text, update.from)
-            addTask(update.text)
+            addTask(update.text, update.to)
+            // console.log(update)
+            // console.log(taskInfo)
             setUpdate({text: '', from: '', to: '', status: null})
         }
     }, [update])
@@ -91,10 +106,12 @@ export default function tasksPage() {
             const storedToDo = localStorage.getItem("toDoTasks");
             const storedInProgress = localStorage.getItem("inProgressTasks");
             const storedDone = localStorage.getItem("doneTasks");
+            const tasksInfo = localStorage.getItem("tasksInfo");
 
             if (storedToDo) setToDoTasks(JSON.parse(storedToDo));
             if (storedInProgress) setInProgressTasks(JSON.parse(storedInProgress));
             if (storedDone) setDoneTasks(JSON.parse(storedDone));
+            if (tasksInfo) setTaskInfo(JSON.parse(tasksInfo));
             setHydrated(true); // Only render after this
         }
     }, [])
@@ -103,9 +120,20 @@ export default function tasksPage() {
             localStorage.setItem("toDoTasks", JSON.stringify(toDoTasks));
             localStorage.setItem("inProgressTasks", JSON.stringify(inProgressTasks));
             localStorage.setItem("doneTasks", JSON.stringify(doneTasks));
+            localStorage.setItem("tasksInfo", JSON.stringify(taskInfo))
         }
-    }, [toDoTasks, inProgressTasks, doneTasks, hydrated]);
+    }, [toDoTasks, inProgressTasks, doneTasks, hydrated, taskInfo]);
 
+
+    // useEffect(() => {
+    //     console.log("toDo", toDoTasks.length)
+    //     console.log("inProgress", inProgressTasks.length)
+    //     console.log("done", doneTasks.length)
+    //     console.log("total:", toDoTasks.length + inProgressTasks.length + doneTasks.length)
+    //     console.log("percent:", (doneTasks.length / (toDoTasks.length + inProgressTasks.length + doneTasks.length)) * 100)
+
+    //     setProgressValue(doneTasks.length / (toDoTasks.length + inProgressTasks.length + doneTasks.length))
+    // }, [toDoTasks, inProgressTasks, doneTasks])
 
     if (!hydrated) return null; // Don’t render yet
     return (
@@ -120,24 +148,30 @@ export default function tasksPage() {
                 onOpen={onOpen}
                 addTask={addTask}
                 setTextEntered={setTextEntered}
-                setCategory={setCategory}
+                // setCategory={setCategory}
                 textEntered={textEntered}
+                // taskInfo={taskInfo}
+                setTaskInfo={setTaskInfo}
                 />
 
             </div>
+            <div className="text-6xl flex flex-row items-center  pb-5">
+                <Progress value={progressValue}/>
+            </div>
+
             <div className="flex flex-row justify-between mt-5 pt-5">
                 <TaskColumn
                     tasks={toDoTasks}
                     setTasks={setToDoTasks}
                     heading="TODO"
                     setActiveCard={setActiveCard}
-                    setCategory={setCategory}
-                    category={category}
                     setActiveText={setActiveText}
                     activeText={activeText}
                     setPendingActiveText={setPendingActiveText}
                     setUpdate={setUpdate}
                     removeTask={removeTask}
+                    taskInfo={taskInfo}
+                    setTaskInfo={setTaskInfo}
                 />
 
                 <TaskColumn
@@ -145,13 +179,13 @@ export default function tasksPage() {
                     setTasks={setInProgressTasks}
                     heading="IN PROGRESS"
                     setActiveCard={setActiveCard}
-                    setCategory={setCategory}
-                    category={category}
                     setActiveText={setActiveText}
                     activeText={activeText}
                     setPendingActiveText={setPendingActiveText}
                     setUpdate={setUpdate}
                     removeTask={removeTask}
+                    taskInfo={taskInfo}
+                    setTaskInfo={setTaskInfo}
                 />
 
                 <TaskColumn
@@ -159,13 +193,13 @@ export default function tasksPage() {
                     setTasks={setDoneTasks}
                     heading="DONE"
                     setActiveCard={setActiveCard}
-                    setCategory={setCategory}
-                    category={category}
                     setActiveText={setActiveText}
                     activeText={activeText}
                     setPendingActiveText={setPendingActiveText}
                     setUpdate={setUpdate}
                     removeTask={removeTask}
+                    taskInfo={taskInfo}
+                    setTaskInfo={setTaskInfo}
                 />
             </div>
             {/* <h1 className="text-white">Active card: {activeCard}</h1> */}
