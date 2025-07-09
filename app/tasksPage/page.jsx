@@ -125,15 +125,19 @@ export default function tasksPage() {
     }, [toDoTasks, inProgressTasks, doneTasks, hydrated, taskInfo]);
 
 
-    // useEffect(() => {
-    //     console.log("toDo", toDoTasks.length)
-    //     console.log("inProgress", inProgressTasks.length)
-    //     console.log("done", doneTasks.length)
-    //     console.log("total:", toDoTasks.length + inProgressTasks.length + doneTasks.length)
-    //     console.log("percent:", (doneTasks.length / (toDoTasks.length + inProgressTasks.length + doneTasks.length)) * 100)
+    useEffect(() => {
+        console.log("toDo", toDoTasks.length)
+        console.log("inProgress", inProgressTasks.length)
+        console.log("done", doneTasks.length)
+        console.log("total:", toDoTasks.length + inProgressTasks.length + doneTasks.length)
+        console.log("percent:", (doneTasks.length / (toDoTasks.length + inProgressTasks.length + doneTasks.length)) * 100)
+        if (toDoTasks.length === 0 && inProgressTasks.length === 0 && doneTasks.length === 0) {
+            setProgressValue(0)
+        } else {
+            setProgressValue((doneTasks.length / (toDoTasks.length + inProgressTasks.length + doneTasks.length)) * 100)
 
-    //     setProgressValue(doneTasks.length / (toDoTasks.length + inProgressTasks.length + doneTasks.length))
-    // }, [toDoTasks, inProgressTasks, doneTasks])
+        }
+    }, [toDoTasks, inProgressTasks, doneTasks])
 
     if (!hydrated) return null; // Don’t render yet
     return (
