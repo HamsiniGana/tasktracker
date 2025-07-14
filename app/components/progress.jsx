@@ -5,14 +5,13 @@ export default function Progress(props) {
     <>
         <CircularProgress
         aria-label="Loading..."
-        color="success"
         classNames={{
             value: "text-l font-bold text-white",
+            svg: "w-[70px] h-[70px] text-emerald-400",
           }}
         showValueLabel={true}
-        size="lg"
         value={props.value}
-        strokeWidth={"4"}
+        strokeWidth={"3"}
         />
     </>
   );
