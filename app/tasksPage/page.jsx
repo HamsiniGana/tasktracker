@@ -136,7 +136,7 @@ export default function tasksPage() {
         <div className="flex flex-col">
             <div className="text-5xl flex flex-row items-center justify-center pb-5">
                 <h2 className="flex-1">My tasks</h2>
-                <Button onPress={onOpen} className="ms-5 flex-2 bg-gradient-to-r from-blue-500 to-green-600">+ Add task</Button>
+                <Button onPress={onOpen} className="ms-5 flex-2 bg-gradient-to-r from-blue-500 to-emerald-400 text-black">+ Add task</Button>
                 <AddTaskModal
                 isOpen={isOpen}
                 onOpenChange={onOpenChange}
