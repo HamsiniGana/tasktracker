@@ -8,7 +8,6 @@ export default function DropArea(props) {
                 onDragEnter={() => setShowDropAreas(true)}
                 onDragLeave={() => setShowDropAreas(false)}
                 onDrop={() => {
-                    console.log('active text:', props.activeText)
                     let taskObj = props.taskInfo.find(t => t.taskText === props.activeText)
                     let moveFrom = ''
                     if (taskObj) {

@@ -4,8 +4,7 @@
 // Add calender
 // Design landing page
 // update navbar
-// add progrss bar
-// after removing task or clearing all , remove from taskInfo as well
+
 "use client";
 import {
   Button,
@@ -15,7 +14,7 @@ import {
 import { useState } from "react";
 import { useEffect } from "react";
 import TaskColumn from '../components/taskColumn'
-import AddTaskModal from "../components/addTaskModal";
+import AddTaskModal from '../components/addTaskModal'
 import Progress from "../components/progress";
 
 
@@ -89,8 +88,6 @@ export default function tasksPage() {
         if (update.status !== null) {
             removeTask(update.text, update.from)
             addTask(update.text, update.to)
-            // console.log(update)
-            // console.log(taskInfo)
             setUpdate({text: '', from: '', to: '', status: null})
         }
     }, [update])
@@ -115,6 +112,7 @@ export default function tasksPage() {
             setHydrated(true); // Only render after this
         }
     }, [])
+
     useEffect(() => {
         if (typeof window !== "undefined" && hydrated) {
             localStorage.setItem("toDoTasks", JSON.stringify(toDoTasks));
@@ -137,9 +135,8 @@ export default function tasksPage() {
     if (!hydrated) return null; // Don’t render yet
     return (
         <div className="flex flex-col">
-
-            <div className="text-6xl flex flex-row items-center justify-center pb-5">
-                <h1 className="flex-1">My tasks</h1>
+            <div className="text-5xl flex flex-row items-center justify-center pb-5">
+                <h2 className="flex-1">My tasks</h2>
                 <Button onPress={onOpen} className="ms-5 flex-2 bg-gradient-to-r from-blue-500 to-green-600">+ Add task</Button>
                 <AddTaskModal
                 isOpen={isOpen}
@@ -157,7 +154,7 @@ export default function tasksPage() {
             <div className="text-6xl flex flex-row items-center  pb-5">
                 <Progress value={progressValue}/>
             </div>
-
+            {/* <Calender /> */}
             <div className="flex flex-row justify-between mt-5 pt-5">
                 <TaskColumn
                     tasks={toDoTasks}

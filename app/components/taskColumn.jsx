@@ -50,6 +50,7 @@ export default function TaskColumn(props) {
                   setPendingActiveText={props.setPendingActiveText}
                   setUpdate={props.setUpdate}
                   removeTask={props.removeTask}
+                  setTasks={props.setTasks}
               />
             ))}
         </div>
