@@ -14,11 +14,12 @@ import { useState } from "react";
 import { useEffect } from "react";
 import TaskColumn from '../components/taskColumn'
 import AddTaskModal from '../components/addTaskModal'
+import ErrorModal from "../components/errorModal";
 import Progress from "../components/progress";
 
-
 export default function tasksPage() {
-    const {isOpen, onOpen, onOpenChange} = useDisclosure();
+    const {isOpen: isOpenAddTask, onOpen: onOpenAddTask, onOpenChange: onOpenChangeAddTask} = useDisclosure();
+
     const [textEntered, setTextEntered] = useState('');
     const [toDoTasks, setToDoTasks] = useState([]);
     const [inProgressTasks, setInProgressTasks] = useState([]);
@@ -27,10 +28,10 @@ export default function tasksPage() {
     const [activeText, setActiveText] = useState('');
     const [hydrated, setHydrated] = useState(false);
     const [taskInfo, setTaskInfo] = useState([]); // structure of state variable: [{taskText: '', taskParent: ''}]
-
     const [pendingActiveText, setPendingActiveText] = useState(null)
     const [update, setUpdate] = useState({text: '', from: '', to: '', status: null})
     const [progressValue, setProgressValue] = useState(0);
+    const [dispErr, setDispErr] = useState(false)
 
     const addTask = (textPassed, categoryPassed) => {
             if (categoryPassed === "todo") {
@@ -38,6 +39,9 @@ export default function tasksPage() {
                 if (!exists) {
                     setToDoTasks(prevArr => [...prevArr, textPassed])
                     setTaskInfo(prevArr => [...prevArr, {taskText: textPassed, taskParent: categoryPassed}])
+                }
+                else {
+                    setDispErr(true)
                 }
 
             } else if (categoryPassed === "in progress") {
@@ -47,12 +51,18 @@ export default function tasksPage() {
                     setTaskInfo(prevArr => [...prevArr, {taskText: textPassed, taskParent: categoryPassed}])
 
                 }
+                else {
+                    setDispErr(true)
+                }
             } else if (categoryPassed === "done"){
                    const exists = doneTasks.find(txt => txt ===textPassed)
                 if (!exists) {
                     setDoneTasks(prevArr => [...prevArr, textPassed])
                     setTaskInfo(prevArr => [...prevArr, {taskText: textPassed, taskParent: categoryPassed}])
 
+                }
+                else {
+                    setDispErr(true)
                 }
             }
             // setPendingTaskUpdate(null)
@@ -131,29 +141,35 @@ export default function tasksPage() {
         }
     }, [toDoTasks, inProgressTasks, doneTasks])
 
+    // useEffect(() => {
+    //     console.log(dispErr)
+    //     // if (dispErr) {
+    //     //     setDispErr(false)
+    //     // }
+    // }, [dispErr])
+
+
     if (!hydrated) return null; // Don’t render yet
     return (
         <div className="flex flex-col">
             <div className="text-5xl flex flex-row items-center justify-center pb-5">
                 <h2 className="flex-1">My tasks</h2>
-                <Button onPress={onOpen} className="ms-5 flex-2 bg-gradient-to-r from-blue-500 to-emerald-400 text-black">+ Add task</Button>
+                <Button onPress={onOpenAddTask} className="ms-5 flex-2 bg-gradient-to-r from-blue-500 to-emerald-400 text-black">+ Add task</Button>
                 <AddTaskModal
-                isOpen={isOpen}
-                onOpenChange={onOpenChange}
-                onOpen={onOpen}
+                isOpen={isOpenAddTask}
+                onOpenChange={onOpenChangeAddTask}
+                onOpen={onOpenAddTask}
                 addTask={addTask}
                 setTextEntered={setTextEntered}
-                // setCategory={setCategory}
                 textEntered={textEntered}
-                // taskInfo={taskInfo}
                 setTaskInfo={setTaskInfo}
                 />
+               <ErrorModal isOpen={dispErr} onOpenChange={setDispErr} setDispErr={setDispErr}/>
 
             </div>
             <div className="text-6xl flex flex-row items-center  pb-5">
                 <Progress value={progressValue}/>
             </div>
-            {/* <Calender /> */}
             <div className="flex flex-row justify-between mt-5 pt-5">
                 <TaskColumn
                     tasks={toDoTasks}

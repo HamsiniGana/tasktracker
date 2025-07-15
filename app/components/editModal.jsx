@@ -14,7 +14,6 @@ export default function EditModal(props) {
     const [textEntered, setTextEntered] = useState('')
   return (
     <>
-      {/* <Button onPress={props.onOpen}>Open Modal</Button> */}
       <Modal isOpen={props.isOpen} onOpenChange={props.onOpenChange}>
         <ModalContent>
           {(onClose) => (
