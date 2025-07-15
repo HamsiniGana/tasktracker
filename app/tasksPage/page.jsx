@@ -1,5 +1,4 @@
 // TODO:
-// add task err check
 // Add calender
 // Design landing page
 // update navbar
