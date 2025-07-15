@@ -12,9 +12,9 @@ export default function TaskColumn(props) {
     <div className="flex flex-col items-center"
         >
         <h3 className="text-2xl mb-5">{props.heading}</h3>
-        <div className="bg-gray-900 w-[400px] min-h-[500px] rounded-lg">
+        <div className="bg-gray-900 xl:w-[400px] md: w-[350px] min-h-[500px] rounded-lg">
           {props.tasks.length > 0 &&
-            <Button className="bg-gradient-to-r from-emerald-400 to-blue-500 my-2 ml-[308px] text-black" onPress={onOpen}>Clear all</Button>
+            <Button className="bg-gradient-to-r from-emerald-400 to-blue-500 my-2 xl:ml-[308px] md:ml-[257px] text-black" onPress={onOpen}>Clear all</Button>
           }
           <DeleteModal
                   onClick={()=> {

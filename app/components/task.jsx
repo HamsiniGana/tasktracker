@@ -58,10 +58,6 @@ export default function Task(props) {
             purpose="deleteTask"/>
 
             <EditModal
-            // onClick={()=> {
-            //     props.setActiveText(props.text);
-            //     props.setPendingActiveText("pending")
-            // }}
             onOpen={onOpenEditModal}
             isOpen={isOpenEditModal}
             onOpenChange={onOpenChangeEditModal}

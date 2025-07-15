@@ -19,7 +19,6 @@ import Progress from "../components/progress";
 
 export default function tasksPage() {
     const {isOpen: isOpenAddTask, onOpen: onOpenAddTask, onOpenChange: onOpenChangeAddTask} = useDisclosure();
-
     const [textEntered, setTextEntered] = useState('');
     const [toDoTasks, setToDoTasks] = useState([]);
     const [inProgressTasks, setInProgressTasks] = useState([]);
@@ -141,14 +140,6 @@ export default function tasksPage() {
         }
     }, [toDoTasks, inProgressTasks, doneTasks])
 
-    // useEffect(() => {
-    //     console.log(dispErr)
-    //     // if (dispErr) {
-    //     //     setDispErr(false)
-    //     // }
-    // }, [dispErr])
-
-
     if (!hydrated) return null; // Don’t render yet
     return (
         <div className="flex flex-col">
@@ -213,7 +204,6 @@ export default function tasksPage() {
                     setTaskInfo={setTaskInfo}
                 />
             </div>
-            {/* <h1 className="text-white">Active card: {activeCard}</h1> */}
         </div>
     )
 }
