@@ -1,11 +1,10 @@
-# Next.js & HeroUI Template
+# Task Tracker:  
+A user-friendly task-tracking application that allows users to create, categorize, and manage tasks with drag-and-drop functionality.  
 
-This is a template for creating applications using Next.js 14 (app directory) and HeroUI (v2).
+## Description:  
+This desktop-only task-tracking app that allows users to create tasks and categorize them into three groups: **"TO-DO"**, **"IN PROGRESS"** and **"DONE"**. Users can drag and drop tasks between these categories, as well as edit or delete them. A progress circle at the top of the page helps users keep track of their overall completion.
 
-[Try it on CodeSandbox](https://githubbox.com/heroui-inc/heroui/next-app-template)
-
-## Technologies Used
-
+## Technologies Used:  
 - [Next.js 14](https://nextjs.org/docs/getting-started)
 - [HeroUI v2](https://heroui.com/)
 - [Tailwind CSS](https://tailwindcss.com/)
@@ -13,41 +12,10 @@ This is a template for creating applications using Next.js 14 (app directory) an
 - [TypeScript](https://www.typescriptlang.org/)
 - [Framer Motion](https://www.framer.com/motion/)
 - [next-themes](https://github.com/pacocoursey/next-themes)
-
-## How to Use
-
-### Use the template with create-next-app
-
-To create a new project based on this template using `create-next-app`, run the following command:
-
-```bash
-npx create-next-app -e https://github.com/heroui-inc/next-app-template
-```
-
-### Install dependencies
-
-You can use one of them `npm`, `yarn`, `pnpm`, `bun`, Example using `npm`:
-
-```bash
-npm install
-```
-
-### Run the development server
-
-```bash
-npm run dev
-```
-
-### Setup pnpm (optional)
-
-If you are using `pnpm`, you need to add the following code to your `.npmrc` file:
-
-```bash
-public-hoist-pattern[]=*@heroui/*
-```
-
-After modifying the `.npmrc` file, you need to run `pnpm install` again to ensure that the dependencies are installed correctly.
-
-## License
-
+- [React Bits](https://reactbits.dev/)
+  
+## List of references:  
+- [YouTube tutorial used for guidance](https://www.youtube.com/watch?v=CJycVlSuaPg&list=PLnXAx2qWEvQL4t4UF33aajKPReF0kn-nG&index=6)
+  
+## License  
 Licensed under the [MIT license](https://github.com/heroui-inc/next-app-template/blob/main/LICENSE).
