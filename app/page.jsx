@@ -1,7 +1,5 @@
 import { Link } from "@heroui/link";
-import { button as buttonStyles } from "@heroui/theme";
 import {Button, ButtonGroup} from "@heroui/button";
-import { siteConfig } from "@/config/site";
 import { GithubIcon } from "@/components/icons";
 import GradientText from './components/gradientText'
 import AnimatedContent from './components/animatedContent'
@@ -33,8 +31,6 @@ export default function Home() {
                 </Link>
             </div>
         </AnimatedContent>
-       
-        
     </div>
   );
 }

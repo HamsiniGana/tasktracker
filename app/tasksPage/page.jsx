@@ -1,7 +1,7 @@
 // TODO:
 // Add calender
-// Design landing page
 // update navbar
+// Two component directories?
 
 "use client";
 import {
