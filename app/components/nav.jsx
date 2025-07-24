@@ -36,7 +36,7 @@ export default function App() {
         ],
       }}
     >
-      <NavbarBrand>
+      <NavbarBrand className="-ml-[120px]">
         <Link href="/" >
            <Image
                 src={logo}
