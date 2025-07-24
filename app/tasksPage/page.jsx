@@ -164,7 +164,7 @@ export default function tasksPage() {
                 <TaskColumn
                     tasks={toDoTasks}
                     setTasks={setToDoTasks}
-                    heading="TODO"
+                    heading="TO DO"
                     setActiveCard={setActiveCard}
                     setActiveText={setActiveText}
                     activeText={activeText}
