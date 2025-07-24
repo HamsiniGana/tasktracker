@@ -1,7 +1,5 @@
 // TODO:
-// update navbar
 // Two component directories?
-
 "use client";
 import {
   Button,
@@ -63,12 +61,10 @@ export default function tasksPage() {
                     setDispErr(true)
                 }
             }
-            // setPendingTaskUpdate(null)
     }
 
     const removeTask = (textPassed, categoryPassed) => {
-
-        if (categoryPassed === "todo") {
+        if (categoryPassed === "to do") {
             const foundTask = toDoTasks.find(txt => txt === textPassed)
             if (foundTask) {
                 setToDoTasks(prevArr => prevArr.filter(txt => txt !== textPassed))
