@@ -3,8 +3,8 @@
 import {Card, CardBody, CardFooter, Divider} from "@heroui/react";
 import DropArea from "./dropArea";
 import Image from 'next/image'
-import bin from '../assets/delete.svg'
-import edit from '../assets/edit.svg'
+import bin from '../assets/delete.png'
+import edit from '../assets/edit.png'
 import DeleteModal from "./deleteModal";
 import {
   useDisclosure,

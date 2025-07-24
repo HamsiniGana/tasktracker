@@ -16,6 +16,6 @@ This desktop-only task-tracking app that allows users to create tasks and catego
   
 ## List of references:  
 - [YouTube tutorial used for guidance](https://www.youtube.com/watch?v=CJycVlSuaPg&list=PLnXAx2qWEvQL4t4UF33aajKPReF0kn-nG&index=6)
-  
+- [Icons used](https://www.flaticon.com/free-icon/bar-chart_478544?related_id=478544)
 ## License  
 Licensed under the [MIT license](https://github.com/heroui-inc/next-app-template/blob/main/LICENSE).

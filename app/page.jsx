@@ -3,9 +3,13 @@ import {Button, ButtonGroup} from "@heroui/button";
 import { GithubIcon } from "@/components/icons";
 import GradientText from './components/gradientText'
 import AnimatedContent from './components/animatedContent'
+import Nav from "./components/nav"
+
 export default function Home() {
   return (
-    <div className="flex flex-col justify-center items-center min-h-full">
+    <>
+    <Nav/>
+        <div className="flex flex-col justify-center items-center min-h-full">
         <AnimatedContent>
             <div>
                 <GradientText
@@ -32,5 +36,7 @@ export default function Home() {
             </div>
         </AnimatedContent>
     </div>
+    </>
+    
   );
 }

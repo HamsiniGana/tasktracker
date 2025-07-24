@@ -1,5 +1,4 @@
 // TODO:
-// Add calender
 // update navbar
 // Two component directories?
 
@@ -15,6 +14,7 @@ import TaskColumn from '../components/taskColumn'
 import AddTaskModal from '../components/addTaskModal'
 import ErrorModal from "../components/errorModal";
 import Progress from "../components/progress";
+import Nav from "../components/nav"
 
 export default function tasksPage() {
     const {isOpen: isOpenAddTask, onOpen: onOpenAddTask, onOpenChange: onOpenChangeAddTask} = useDisclosure();
@@ -142,6 +142,7 @@ export default function tasksPage() {
     if (!hydrated) return null; // Don’t render yet
     return (
         <div className="flex flex-col">
+            <Nav/>
             <div className="text-5xl flex flex-row items-center justify-center pb-5">
                 <h2 className="flex-1">My tasks</h2>
                 <Button onPress={onOpenAddTask} className="ms-5 flex-2 bg-gradient-to-r from-blue-500 to-emerald-400 text-black">+ Add task</Button>
