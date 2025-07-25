@@ -12,6 +12,7 @@ export interface ProvidersProps {
   themeProps?: ThemeProviderProps;
 }
 
+
 declare module "@react-types/shared" {
   interface RouterConfig {
     routerOptions: NonNullable<
