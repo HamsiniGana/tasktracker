@@ -1,6 +1,5 @@
 import { Link } from "@heroui/link";
-import {Button, ButtonGroup} from "@heroui/button";
-import { GithubIcon } from "@/components/icons";
+import {Button} from "@heroui/button";
 import GradientText from './components/gradientText'
 import AnimatedContent from './components/animatedContent'
 import Nav from "./components/nav"
