@@ -1,5 +1,3 @@
-// TODO:
-// Two component directories?
 "use client";
 import {
   Button,
