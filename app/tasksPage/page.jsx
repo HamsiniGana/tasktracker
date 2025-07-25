@@ -30,7 +30,7 @@ export default function tasksPage() {
     const [dispErr, setDispErr] = useState(false)
 
     const addTask = (textPassed, categoryPassed) => {
-            if (categoryPassed === "todo") {
+            if (categoryPassed === "to do") {
                 const exists = toDoTasks.find(txt => txt === textPassed)
                 if (!exists) {
                     setToDoTasks(prevArr => [...prevArr, textPassed])

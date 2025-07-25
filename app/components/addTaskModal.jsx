@@ -11,7 +11,7 @@ import {RadioGroup, Radio} from "@heroui/radio";
 import { useState } from "react";
 
 export default function AddTaskModal (props) {
-    const [category, setCategory] = useState("todo")
+    const [category, setCategory] = useState("to do")
     return (
         <Modal isOpen={props.isOpen} onOpenChange={props.onOpenChange}>
             <ModalContent>
@@ -25,7 +25,7 @@ export default function AddTaskModal (props) {
                                 onChange={(e)=> props.setTextEntered(e.target.value)} />
 
                             <RadioGroup label="Add to:">
-                                <Radio value="todo" onChange={()=> {setCategory("todo")}}>Todo</Radio>
+                                <Radio value="to do" onChange={()=> {setCategory("to do")}}>Todo</Radio>
                                 <Radio value="in progress" onChange={()=> {setCategory("in progress")}}>In progress</Radio>
                                 <Radio value="done" onChange={()=> {setCategory("done")}}>Done</Radio>
                             </RadioGroup>
