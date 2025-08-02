@@ -34,7 +34,7 @@ export default function Task(props) {
                 height={20}
                 alt="Delete icon"
                 onClick={onOpenDeleteModal}
-              />
+            />
               <Image
                 src={edit}
                 width={20}
@@ -45,37 +45,39 @@ export default function Task(props) {
             />
             </CardFooter>
             <DeleteModal
-            onClick={()=> {
-                props.setActiveText(props.text);
-                props.setPendingActiveText("pending")
-            }}
-            onOpen={onOpenDeleteModal}
-            isOpen={isOpenDeleteModal}
-            onOpenChange={onOpenChangeDeleteModal}
-            removeTask={props.removeTask}
-            column={props.column}
-            text={props.text}
-            purpose="deleteTask"/>
+                onClick={()=> {
+                    props.setActiveText(props.text);
+                    props.setPendingActiveText("pending")
+                }}
+                onOpen={onOpenDeleteModal}
+                isOpen={isOpenDeleteModal}
+                onOpenChange={onOpenChangeDeleteModal}
+                removeTask={props.removeTask}
+                column={props.column}
+                text={props.text}
+                purpose="deleteTask"
+            />
 
             <EditModal
-            onOpen={onOpenEditModal}
-            isOpen={isOpenEditModal}
-            onOpenChange={onOpenChangeEditModal}
-            setTaskInfo={props.setTaskInfo}
-            text={props.text}
-            column={props.column}
-            setTasks={props.setTasks}
+                onOpen={onOpenEditModal}
+                isOpen={isOpenEditModal}
+                onOpenChange={onOpenChangeEditModal}
+                setTaskInfo={props.setTaskInfo}
+                text={props.text}
+                column={props.column}
+                setTasks={props.setTasks}
             />
             <Divider />
         </Card>
-        <DropArea addTask={props.addTask}
-                    column={props.column}
-                    text={props.text}
-                    setPendingTaskUpdate={props.setPendingTaskUpdate}
-                    activeText={props.activeText}
-                    setUpdate={props.setUpdate}
-                    taskInfo={props.taskInfo}
-                    setTaskInfo={props.setTaskInfo}
+        <DropArea
+            addTask={props.addTask}
+            column={props.column}
+            text={props.text}
+            setPendingTaskUpdate={props.setPendingTaskUpdate}
+            activeText={props.activeText}
+            setUpdate={props.setUpdate}
+            taskInfo={props.taskInfo}
+            setTaskInfo={props.setTaskInfo}
         />
     </>
   );

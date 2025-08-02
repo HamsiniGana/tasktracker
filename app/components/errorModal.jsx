@@ -14,15 +14,15 @@ export default function ErrorModal(props) {
         <ModalContent>
           {(onClose) => (
             <>
-              <ModalHeader className="flex flex-col gap-1">ERROR!</ModalHeader>
-              <ModalBody>
-                <h5>Task already exists!</h5>
-              </ModalBody>
-              <ModalFooter>
-                <Button color="danger" variant="light" onPress={() => {props.setDispErr(false); onClose()}}>
-                  Close
-                </Button>
-              </ModalFooter>
+                <ModalHeader className="flex flex-col gap-1">ERROR!</ModalHeader>
+                <ModalBody>
+                    <h5>Task already exists!</h5>
+                </ModalBody>
+                <ModalFooter>
+                    <Button color="danger" variant="light" onPress={() => {props.setDispErr(false); onClose()}}>
+                    Close
+                    </Button>
+                </ModalFooter>
             </>
           )}
         </ModalContent>

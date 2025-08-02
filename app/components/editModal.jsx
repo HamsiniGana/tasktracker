@@ -17,28 +17,28 @@ export default function EditModal(props) {
         <ModalContent>
           {(onClose) => (
             <>
-              <ModalHeader className="flex flex-col gap-1">Edit task</ModalHeader>
-              <ModalBody>
-                <h5>New task description:</h5>
-                <Input placeholder="Enter new task description"
-                                type="text"
-                                onChange={(e)=> setTextEntered(e.target.value)} />
+                <ModalHeader className="flex flex-col gap-1">Edit task</ModalHeader>
+                <ModalBody>
+                    <h5>New task description:</h5>
+                    <Input placeholder="Enter new task description"
+                                    type="text"
+                                    onChange={(e)=> setTextEntered(e.target.value)} />
 
-              </ModalBody>
-              <ModalFooter>
-                <Button color="danger" variant="light" onPress={onClose}>
-                  Close
-                </Button>
-                <Button color="primary" onPress={() => {
-                    onClose();
-                    props.setTaskInfo((prev) => {return prev.map(t => props.text === t.taskText ? {...t , taskText: textEntered} : t)})
-                    props.setTasks((prevArr) => {
-                        return prevArr.map(txt => txt === props.text ? textEntered : txt)
-                    })
-                }} >
-                  Confirm
-                </Button>
-              </ModalFooter>
+                </ModalBody>
+                <ModalFooter>
+                    <Button color="danger" variant="light" onPress={onClose}>
+                    Close
+                    </Button>
+                    <Button color="primary" onPress={() => {
+                        onClose();
+                        props.setTaskInfo((prev) => {return prev.map(t => props.text === t.taskText ? {...t , taskText: textEntered} : t)})
+                        props.setTasks((prevArr) => {
+                            return prevArr.map(txt => txt === props.text ? textEntered : txt)
+                        })
+                    }} >
+                    Confirm
+                    </Button>
+                </ModalFooter>
             </>
           )}
         </ModalContent>
