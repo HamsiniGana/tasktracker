@@ -3,7 +3,7 @@ import {heroui} from "@heroui/theme"
 /** @type {import('tailwindcss').Config} */
 const config = {
   content: [
-    './components/**/*.{js,ts,jsx,tsx,mdx}',
+    './app/components/**/*.{js,ts,jsx,tsx,mdx}',
     './app/**/*.{js,ts,jsx,tsx,mdx}',
     "./node_modules/@heroui/theme/dist/**/*.{js,ts,jsx,tsx}"
   ],
@@ -24,7 +24,6 @@ const config = {
       gradient: 'gradient 8s linear infinite',
     },
     },
-    
   },
   darkMode: "class",
   plugins: [heroui()],

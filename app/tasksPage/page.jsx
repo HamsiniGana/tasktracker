@@ -139,7 +139,7 @@ export default function tasksPage() {
             <Nav/>
             <div className="text-5xl flex flex-row items-center justify-center pb-5">
                 <h2 className="flex-1">My tasks</h2>
-                <Button onPress={onOpenAddTask} className="ms-5 flex-2 bg-gradient-to-r from-blue-500 to-emerald-400 text-black">+ Add task</Button>
+                <Button onPress={onOpenAddTask} size = "lg" className="ms-5 bg-gradient-to-r from-blue-500 to-emerald-400 text-black">+ Add task</Button>
                 <AddTaskModal
                 isOpen={isOpenAddTask}
                 onOpenChange={onOpenChangeAddTask}
